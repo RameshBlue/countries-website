@@ -45,7 +45,7 @@ function CountryDetailedView() {
                         <div className='font-semibold text-md select-none dark:text-slate-100'>Back</div>
                     </div>
                     <div className={`flex flex-col md:flex-row justify-between items-center gap-5 mt-16`}>
-                        <img className='w-[60%] md:w-[40%] object-contain md:self-start' src={selectedCountry.flags.png} alt="" />
+                        <img className='w-[60%] md:w-[40%] object-contain md:self-start' src={selectedCountry.flags?.png} alt="" />
                         <div className='flex flex-col justify-center w-[85%] md:w-[50%]'>
 
                             <div className='font-bold text-[35px] dark:text-slate-100'>
@@ -89,7 +89,7 @@ function CountryDetailedView() {
                                 </div>
                                 <div className='flex flex-wrap gap-2'>
                                     {
-                                        selectedCountry.borders.map((item, index) => {
+                                        selectedCountry.borders?.map((item, index) => {
                                             return (
                                                 <div key={index} className='text-sm rounded shadow-md border-[1px] border-solid border-gray-400 dark:border-gray-700 px-4  dark:text-slate-100'>
                                                     {item}

@@ -10,7 +10,7 @@ function CountryCard(props: propTypes) {
 
     return (
         <div className='shadow-md rounded overflow-hidden bg-slate-50 dark:bg-slate-700 cursor-pointer' onClick={()=>{
-            countriesState.setSelectedCountry(props.countryData.name);
+            countriesState.setSelectedCountry(props.countryData.name, countriesState.countries);
         }}>
             <img src={props.countryData.flags.png} alt="flag" className='w-full aspect-video object-cover' />
             <div className='flex flex-col p-4'>

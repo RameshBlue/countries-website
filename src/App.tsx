@@ -48,13 +48,13 @@ function App() {
         <div className='flex max-w-[1320px] w-screen px-3 justify-between items-center'>
           <h1 className='text-lg sm:text-2xl font-bold dark:text-white'>Where in the world?</h1>
           <div className='flex items-center'>
-            <div className='cursor-pointer p-2'>
+            <div className='p-2'>
               {
-                isDarkMode ? <FaMoon className='text-xl text-white' onClick={() => {
+                isDarkMode ? <FaMoon className='text-xl text-white cursor-pointer' onClick={() => {
                   localStorage.theme = 'light';
                   handleDarkMode();
                   setIsDarkMode(false);
-                }} /> : <FaSun className='text-xl' onClick={() => {
+                }} /> : <FaSun className='text-xl cursor-pointer' onClick={() => {
                   localStorage.theme = 'dark'
                   handleDarkMode();
                   setIsDarkMode(true);

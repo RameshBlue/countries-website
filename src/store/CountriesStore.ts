@@ -28,7 +28,7 @@ export interface CountriesState{
     loading: boolean,
     setCountries : (region: string, searchText: string) => void,
     clearCountries: ()=> void,
-    setSelectedCountry : (countryName: string)=> void,
+    setSelectedCountry : (countryName: string, allCountries: CountriesData[])=> void,
     setSelectedCountryNull: ()=> void
 }
 
@@ -63,10 +63,8 @@ const countriesStore = create<CountriesState>(set => ({
         set({countries: []});
     },
 
-    setSelectedCountry: async (countryName: string)=>{
+    setSelectedCountry: async (countryName: string, allCountries: CountriesData[])=>{
         set({loading: true});
-        const res = await fetch("https://restcountries.com/v2/all");
-        let allCountries: CountriesData[] = await res.json();
         let country: CountriesData = null;
     
         allCountries.forEach((item) => {
