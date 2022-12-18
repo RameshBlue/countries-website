@@ -1,9 +1,10 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AiOutlineSearch } from 'react-icons/ai'
 import { FaSun, FaMoon } from 'react-icons/fa'
 import CountryCard from './components/CountryCard';
 import CountryDetailedView from './components/CountryDetailedView';
 import FilterMenu from './components/FilterMenu';
+import NoResultsFound from './components/NoResultsFound';
 import countriesStore from './store/CountriesStore';
 import globalStore from './store/GlobalStore';
 
@@ -13,8 +14,8 @@ function App() {
 
   const [isDarkMode, setIsDarkMode] = useState(false)
 
-  const globals = globalStore(state=> state);
-  const countriesState = countriesStore(state=> state);
+  const globals = globalStore(state => state);
+  const countriesState = countriesStore(state => state);
 
   useEffect(() => {
     countriesState.setCountries(globals.region, globals.searchText);
@@ -23,7 +24,7 @@ function App() {
   }, [])
 
   const handleDarkMode = () => {
-    if (localStorage.theme === 'dark' ) {
+    if (localStorage.theme === 'dark') {
       document.documentElement.classList.add('dark')
     } else {
       document.documentElement.classList.remove('dark')
@@ -82,8 +83,8 @@ function App() {
               </div>
             </div>
 
-            <div className={`${countriesState.loading && 'hidden'} flex items-center justify-center py-10`}>
-              <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 px-3 max-w-[1320px] w-screen'>
+            <div className={`${countriesState.loading ? 'hidden' : 'flex items-center justify-center py-10'}`}>
+              <div className={`${countriesState.countries.length <= 0 && 'hidden'} grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 px-3 max-w-[1320px] w-screen`}>
                 {
                   countriesState.countries.map((item, index) => {
                     return (
@@ -92,6 +93,7 @@ function App() {
                   })
                 }
               </div>
+              <NoResultsFound show={countriesState.countries.length === 0}/>
             </div>
           </>
           :
