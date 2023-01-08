@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { AiOutlineSearch } from 'react-icons/ai'
 import { FaSun, FaMoon } from 'react-icons/fa'
 import CountryCard from './components/CountryCard';
@@ -24,6 +24,7 @@ function App() {
   }, [])
 
   const handleDarkMode = () => {
+    console.log(localStorage.theme)
     if (localStorage.theme === 'dark') {
       document.documentElement.classList.add('dark')
     } else {
@@ -48,21 +49,17 @@ function App() {
       <header className='flex py-4 bg-slate-50 dark:bg-slate-700 shadow-md justify-center items-center'>
         <div className='flex max-w-[1320px] w-screen px-3 justify-between items-center'>
           <h1 className='text-lg sm:text-2xl font-bold dark:text-white'>Where in the world?</h1>
-          <div className='flex items-center'>
+          <div className='flex items-center cursor-pointer' onClick={() => {
+                  localStorage.theme = localStorage.theme === 'light' ? 'dark' : 'light';
+                  handleDarkMode();
+                  setIsDarkMode(!isDarkMode);
+                }}>
             <div className='p-2'>
               {
-                isDarkMode ? <FaMoon className='text-xl text-white cursor-pointer' onClick={() => {
-                  localStorage.theme = 'light';
-                  handleDarkMode();
-                  setIsDarkMode(false);
-                }} /> : <FaSun className='text-xl cursor-pointer' onClick={() => {
-                  localStorage.theme = 'dark'
-                  handleDarkMode();
-                  setIsDarkMode(true);
-                }} />
+                isDarkMode ? <FaMoon className='text-xl text-white cursor-pointer'  /> : <FaSun className='text-xl cursor-pointer' />
               }
             </div>
-            <h5 className='xs:hidden sm:block font-semibold select-none m-0 dark:text-white'>Dark Mode</h5>
+            <h5 className='xs:hidden sm:block font-semibold select-none m-0 dark:text-white'>{isDarkMode ? 'DarkMode' : 'LightMode'}</h5>
           </div>
         </div>
       </header>
